@@ -5,14 +5,15 @@
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
-        "php": "8.2",
+        "php": "^8.2",
         "guzzlehttp/guzzle": "7.8.1",
         "laravel/framework": "10.35.0",
-        "laravel/sanctum": "3.3.2",
+        "laravel/sanctum": "^3.3",
         "laravel/tinker": "2.8.2"
     },
     "require-dev": {
         "fakerphp/faker": "1.23.0",
+        "friendsofphp/php-cs-fixer": "3.41.1",
         "laravel/pint": "1.13.7",
         "laravel/sail": "1.26.3",
         "mockery/mockery": "1.6.7",
@@ -33,6 +34,14 @@
         }
     },
     "scripts": {
+        "migrate": "docker compose exec laravel php artisan migrate",
+        "seed": "docker compose exec laravel php artisan db:seed",
+        "lint": "docker compose exec laravel ./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --verbose --ansi --dry-run",
+        "format": "docker compose exec laravel ./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --verbose --ansi",
+        "test": [
+            "docker compose exec postgres sh -c 'psql -U $POSTGRES_USER -c \"drop database if exists postgres_test;\" -c \"create database postgres_test;\"'",
+            "docker compose exec -e DB_DATABASE=postgres_test laravel php artisan test"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
@@ -57,8 +66,7 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "pestphp/pest-plugin": true,
-            "php-http/discovery": true
+            "pestphp/pest-plugin": false
         }
     },
     "minimum-stability": "stable",

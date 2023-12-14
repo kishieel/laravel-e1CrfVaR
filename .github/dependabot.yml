@@ -1,0 +1,15 @@
+version: 2
+updates:
+  - package-ecosystem: "composer"
+    directory: "/"
+    target-branch: "master"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    labels:
+      - "dependabot"
+    assignees:
+      - "kishieel"

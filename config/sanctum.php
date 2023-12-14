@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Laravel\Sanctum\Sanctum;
 
 return [
@@ -47,6 +49,8 @@ return [
     */
 
     'expiration' => null,
+    'access_token_lifetime' => env('ACCESS_TOKEN_LIFETIME', '15m'),
+    'refresh_token_lifetime' => env('REFRESH_TOKEN_LIFETIME', '15m'),
 
     /*
     |--------------------------------------------------------------------------

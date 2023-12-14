@@ -1,6 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
+declare(strict_types=1);
+
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,3 +18,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/auth/sign-up', [AuthController::class, 'signUp']);
+Route::post('/auth/issue-token', [AuthController::class, 'issueToken']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/auth/refresh-token', [AuthController::class, 'refreshToken']);
+    Route::post('/user-import', [UserController::class, 'import']);
+    Route::apiResource('/tasks', TaskController::class);
+});

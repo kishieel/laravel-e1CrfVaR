@@ -2,7 +2,10 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "keywords": [
+        "laravel",
+        "framework"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.2",
@@ -34,7 +37,17 @@
         }
     },
     "scripts": {
+        "setup": [
+            "cp -u .env.example .env",
+            "read -p \"Provide app id for https://dummyapi.io: \" app_id && sed -i \"s/^USERS_PROVIDER_APP_ID=.*/USERS_PROVIDER_APP_ID=${app_id}/\" .env",
+            "docker compose up -d",
+            "./wait-for-services.sh",
+            "@migrate:fresh",
+            "@seed"
+        ],
+        "start:dev": "docker compose up -d",
         "migrate": "docker compose exec laravel php artisan migrate",
+        "migrate:fresh": "docker compose exec laravel php artisan migrate:fresh",
         "seed": "docker compose exec laravel php artisan db:seed",
         "lint": "docker compose exec laravel ./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --verbose --ansi --dry-run",
         "format": "docker compose exec laravel ./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --verbose --ansi",
@@ -42,6 +55,11 @@
             "docker compose exec postgres sh -c 'psql -U $POSTGRES_USER -c \"drop database if exists postgres_test;\" -c \"create database postgres_test;\"'",
             "docker compose exec -e DB_DATABASE=postgres_test laravel php artisan test"
         ],
+        "test:feat": [
+            "docker compose exec postgres sh -c 'psql -U $POSTGRES_USER -c \"drop database if exists postgres_test;\" -c \"create database postgres_test;\"'",
+            "docker compose exec -e DB_DATABASE=postgres_test laravel php artisan test --filter Feature"
+        ],
+        "test:unit": "docker compose exec laravel php artisan test --filter Unit",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"

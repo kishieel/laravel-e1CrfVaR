@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
@@ -185,4 +187,14 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Users Provider
+    |--------------------------------------------------------------------------
+    */
+
+    'users_provider' => [
+        'uri' => env('USERS_PROVIDER_URI'),
+        'app_id' => env('USERS_PROVIDER_APP_ID'),
+    ],
 ];

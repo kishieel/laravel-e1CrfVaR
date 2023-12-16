@@ -15,6 +15,10 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 use function response;
 
+/**
+ * @group Tasks
+ * @authenticated
+ */
 class TaskController extends Controller
 {
     use Paginable;
@@ -23,6 +27,12 @@ class TaskController extends Controller
     {
     }
 
+    /**
+     * @queryParam page integer The page number for pagination (default: 1).
+     * @queryParam limit integer The number of items per page (default: 10).
+     * @queryParam search string Search query to filter tasks by title, description or status.
+     * @queryParam sort[] string Sort users by columns and direction (e.g., sort[]=name:asc).
+     */
     public function index(Request $request): AnonymousResourceCollection
     {
         $this->authorize('viewAny', Task::class);

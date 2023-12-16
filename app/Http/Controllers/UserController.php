@@ -9,6 +9,10 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Services\UserService;
 
+/**
+ * @group Users
+ * @authenticated
+ */
 class UserController extends Controller
 {
     public function __construct(private readonly UserService $userService)

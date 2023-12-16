@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace Tests\Feature\Http\Controllers;
 
 use App\Enums\Ability;
-use App\Enums\UserType;
 use App\Models\User;
-use Database\Factories\UserFactory;
+
+use function fake;
+
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
-use function fake;
 
 class UserControllerTest extends TestCase
 {
@@ -58,7 +58,8 @@ class UserControllerTest extends TestCase
             'lastName' => fake()->firstName(),
             'picture' => fake()->imageUrl(),
         ];
-        Http::fake(['*' => Http::response($response),]);
+        Http::fake(['*' => Http::response($response), ]);
+
         return $response;
     }
 }

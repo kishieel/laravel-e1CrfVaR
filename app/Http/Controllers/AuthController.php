@@ -11,6 +11,7 @@ use App\Http\Resources\TokensResource;
 use App\Services\AuthService;
 use Auth;
 
+/** @group Auth */
 class AuthController extends Controller
 {
     public function __construct(private readonly AuthService $authService)
@@ -34,6 +35,7 @@ class AuthController extends Controller
         return TokensResource::make($accessToken);
     }
 
+    /** @authenticated */
     public function refreshToken(): TokensResource
     {
         $accessToken = $this->authService->refreshToken();

@@ -1,3 +1,5 @@
+.scribe/
+.reports/
 .fleet/
 .idea/
 .vscode/
@@ -14,7 +16,6 @@ vendor/
 .env.backup
 .env.production
 .phpunit.result.cache
-.reports
 Homestead.json
 Homestead.yaml
 auth.json

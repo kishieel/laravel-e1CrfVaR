@@ -1,7 +1,12 @@
+.docs/
+.docker/
+.github
 .git/
 .idea/
 .vscode/
 .phpunit.cache/
+.reports/
+.scribe/
 docker/
 node_modules/
 public/build/
@@ -22,9 +27,8 @@ vendor/
 .gitattributes
 .php-cs-fixer.php
 .phpunit.result.cache
-.phpunit.cache
-.reports
 auth.json
 docker-compose.yml
 Dockerfile
 phpunit.xml
+wait-for-services.sh

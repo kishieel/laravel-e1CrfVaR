@@ -19,7 +19,7 @@
         "friendsofphp/php-cs-fixer": "3.41.1",
         "knuckleswtf/scribe": "4.26.0",
         "laravel/pint": "1.13.7",
-        "laravel/sail": "1.26.3",
+        "laravel/sail": "1.27.0",
         "mockery/mockery": "1.6.7",
         "nunomaduro/collision": "7.10.0",
         "phpunit/phpunit": "10.5.2",
